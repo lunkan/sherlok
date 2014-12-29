@@ -1,0 +1,111 @@
+/* Space out content a bit */
+body {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
+#top {
+	position:absolute;
+	top:0;
+	left:0;
+	height:38px;
+	right:0;
+}
+
+#main {
+	position:absolute;
+	top:38px;
+	left:0;
+	right:0;
+	bottom:0;
+}
+
+/* Custom page header */
+.header {
+	background-color:#333;
+}
+.header a {
+	text-decoration: none;
+	color: #ccc !important;
+}
+.header h1 {
+	font-size: 16px;
+	line-height: 36px;
+	margin: 0 20px;
+	text-transform: uppercase;
+	font-weight: 300;
+	letter-spacing: 3px;
+}
+.header .brand-icon {
+	border-radius: 25px;
+	background-color:#ccc;
+	margin-right:5px;
+	display: inline-block;
+	line-height:25px;
+	width: 25px;
+	text-align: center;
+	vertical-align: middle;
+}
+.header .brand-icon img {
+	vertical-align: middle;
+	margin-top: -2px;
+}	
+
+	
+.container {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	min-height:100%;
+}
+.container-head, .container-foot {
+	flex: none;
+}
+.container-body {
+	flex: flex-grow;
+}
+
+md-toolbar {
+	background-color: #999 !important;
+}
+.container-foot .md-button {
+	font-size:18px;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+button.md-fab[disabled] {
+	box-shadow: 0px 2px 5px 0 rgba(0, 0, 0, 0);
+}
+
+md-card {
+	text-align: center;
+	border: solid 5px #fff;
+	cursor: pointer;
+}
+md-card img {
+	max-width: 100%;
+}
+.compare-option {
+	width: 250px;
+	height: 180px;
+}
+.diff-snapshot {
+	box-shadow: 0px 2px 5px 0 rgba(0, 0, 0, 0);
+}
+.selected-snapshot {
+	border-color:#72d572;
+}
+
+.page-index-label {
+	border-radius: 25px;
+	background-color:#03a9f4;
+	margin-left:10px;
+	display: inline-block;
+	line-height:40px;
+	text-align: center;
+	vertical-align: middle;
+	padding: 0 20px;
+}

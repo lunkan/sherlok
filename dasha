@@ -1,0 +1,66 @@
+#!/bin/sh
+FILES=app/images/master/*
+
+function compare_diff () {
+	
+	removeout=$(rm "app/images/diff/*")
+	
+	for f in $FILES
+	do
+		name=$(basename "$f")
+		master_path=$f
+		candidate_path="app/images/candidate/$name"
+		
+		if [ -f "$candidate_path" ]
+		then
+		  diff_path="app/images/diff/$name"
+	
+		  diff_value=$(compare -metric AE -fuzz 5% \
+				$master_path $candidate_path \
+				-compose Src -highlight-color White -lowlight-color Black \
+				$diff_path \
+				2>&1)
+		
+		  #Save diff-mask only if diff detected
+		  threshold=0
+		  if [ "$diff_value" -gt "$threshold" ]
+		  then
+		    echo "detected diff $master_path $candidate_path diff: $diff_value"
+	      else
+		    stdout=$(rm "$diff_path" 2>&1)
+		    echo "no diff $master_path $candidate_path"
+		  fi
+		
+	    else
+		  echo "\nno file match found for mask $master_path"	
+		fi
+	done
+}
+
+function help () {
+    echo "Dasha - A simple script that makes image comparison easy.";
+    echo " ";
+    echo "    dasha init                  - include jasmine in the project";
+    echo "    dashs run                   - runs tests in browser";
+}
+
+if [ $1 ]
+then
+    case "$1" in
+    init)
+    	echo "init";
+    ;;
+    create)
+    	echo "create";
+    ;;
+    run)
+		compare_diff
+		echo "\ncompare complete!";
+    ;;
+    *)
+        help
+    ;;
+	esac
+else
+    help
+fi

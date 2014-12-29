@@ -1,0 +1,21 @@
+<div class="container" layout-align="center center">
+	{{isBusy}}
+	<div flex layout="row" layout-align="center center" ng-show="!busyMsg">
+		<md-card class="compare-option" ng-click="newSession()">
+			<h2>New</h3>
+			<p>Run image comparison and starts a fresh session</p>
+		</md-card>
+		<md-card class="compare-option" ng-click="loadSession()">
+			<h2>Load</h2>
+			<p>Loads images without running a new comparison.</p>
+		</md-card>
+	</div>
+	
+	<div flex layout="column" layout-align="center center" ng-show="busyMsg">
+		<div>
+			<md-progress-circular md-mode="indeterminate"></md-progress-circular>
+		</div>
+		<p>{{busyMsg}}</p>
+	</div>
+	
+</div>
