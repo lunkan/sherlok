@@ -11,6 +11,50 @@ var fs = require('fs');
 var path = require('path');
 
 var filetypes = ["jpg", "png", "gif"];
+
+function copyFile(source, target, cb) {
+    var cbCalled = false;
+
+    var rd = fs.createReadStream(source);
+    rd.on("error", function(err) {
+        done(err);
+    });
+    var wr = fs.createWriteStream(target);
+    wr.on("error", function(err) {
+        done(err);
+    });
+    wr.on("close", function(ex) {
+        done();
+    });
+    rd.pipe(wr);
+
+    function done(err) {
+        if (!cbCalled) {
+            //cb(err);
+            cbCalled = true;
+        }
+    }
+}
+
+function clearDir(dirPath) {
+    var removeSelf = false;
+    try { var files = fs.readdirSync(dirPath); }
+    catch(e) { return; }
+    if (files.length > 0) {
+        for (var i = 0; i < files.length; i++) {
+            var filePath = dirPath + '/' + files[i];
+            if (fs.statSync(filePath).isFile())
+                fs.unlinkSync(filePath);
+            else
+                rmDir(filePath);
+        }
+    }
+    if (removeSelf) {
+        fs.rmdirSync(dirPath);
+    }
+}
+
+
 function listImages(directive) {
   var imageFiles = [];
   fs.readdirSync(directive).forEach(function(file) {
@@ -21,7 +65,20 @@ function listImages(directive) {
     });	
   });
   return imageFiles;
-};
+}
+
+function saveImages(confirmedImages) {
+
+    confirmedImages.forEach(function(imageFile) {
+        var fileName = path.basename(imageFile);
+        var copyFrom = './app/'+imageFile;
+        var copyTo = './app/images/master/' + fileName;
+        var removeFrom = './app/images/diff/' + fileName;
+
+        copyFile(copyFrom, copyTo, null);
+        fs.unlinkSync(removeFrom);
+    });
+}
 
 var mocks = {
   "/api/compare": function() {
@@ -46,6 +103,21 @@ var mocks = {
 		"candidate": listImages('./app/images/candidate/')
 	  }
     };
+  },
+  "/api/save": function(req) {
+
+      req.setEncoding('utf8');
+      req.on('data', function (rawData) {
+          var data = JSON.parse(rawData);
+          saveImages(data.files);
+      });
+      return "success";
+  },
+  "/api/revert": function() {
+      clearDir('./app/images/master/');
+
+      fs.createReadStream('./app/images/history/long-text_chrome.jpg').pipe(fs.createWriteStream('./app/images/master/long-text_chrome.jpg'));
+      return "reverted";
   }
 };
 
@@ -53,8 +125,8 @@ function mock() {
   return function (req, res, next) {
     var mockedResponse = mocks[req.url];
     if (mockedResponse) {
-	  res.writeHead(200, {"Content-Type": "text/json"});
-	  res.write(JSON.stringify(mockedResponse()));
+      res.writeHead(200, {"Content-Type": "text/json"});
+	  res.write(JSON.stringify(mockedResponse(req)));
       res.end();
     } else {
       next();

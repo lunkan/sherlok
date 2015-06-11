@@ -12,7 +12,7 @@ angular.module('dashaApp')
 	};
 	
 	$scope.select = function(type) {
-		if(type=='candidate') {
+        if(type=='candidate') {
 			$scope.item.selected = 'candidate';
 		}
 		else if(type=='master') {

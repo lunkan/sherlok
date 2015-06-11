@@ -84,6 +84,16 @@ angular.module('dashaApp').factory('ImageCollection', function(ImageItem) {
 			return null;
 		}
 	};
+
+    ImageCollection.prototype.getConfirmed = function() {
+
+        var confirmed = [];
+        this.collection.forEach(function(imageItem) {
+            confirmed = confirmed.concat(imageItem.getConfirmed());
+        });
+
+        return confirmed;
+    };
 	
 	return ImageCollection;
 });

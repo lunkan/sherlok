@@ -28,6 +28,10 @@ angular
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })
+      .when('/save', {
+        templateUrl: 'views/save.html',
+        controller: 'SaveCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });

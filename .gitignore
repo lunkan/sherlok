@@ -1,0 +1,9 @@
+.out/**
+.idea/**
+node_modules/**
+bower_components/**
+app/images
+todo.md
+npm-debug.log
+.gitmodules
+.jshintrc

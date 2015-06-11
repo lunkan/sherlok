@@ -54,16 +54,22 @@ body {
 
 	
 .container {
+	display: -webkit-flex;
 	display: flex;
+	-webkit-flex-direction: column;
 	flex-direction: column;
+	-webkit-flex-wrap: nowrap;
 	flex-wrap: nowrap;
+	-webkit-justify-content: space-between;
 	justify-content: space-between;
 	min-height:100%;
 }
 .container-head, .container-foot {
+	-webkit-flex: none;
 	flex: none;
 }
 .container-body {
+	-webkit-flex: flex-grow;
 	flex: flex-grow;
 }
 

@@ -34,23 +34,35 @@ angular.module('dashaApp')
 		if(ImageService.getCollection().next()) {
 			refresh();
 		}
-	}
+	};
 	
 	$scope.onPrevious = function() {
 		if(ImageService.getCollection().previous()) {
 			refresh();
 		}
-	}
+	};
 	
-	$scope.onConfirm = function() {
+	/*$scope.onConfirm = function() {
 		if(ImageService.getCollection().next()) {
 			refresh();
 		}
-	}
-	
-	$scope.onSnapshotselect = function() {
-		
-	}
+	};*/
+
+    $scope.onSave = function() {
+        $location.path('/save');
+    };
+
+    /*$scope.onRevert = function() {
+        ImageService.revert().then(function() {
+            console.log('Quit or die after revert?');
+        });
+    };*/
+
+    $scope.onQuit = function() {
+        $location.path('/');
+    };
+
+
 	
 	if(!ImageService.getCollection()) {
 		$location.path('/');
