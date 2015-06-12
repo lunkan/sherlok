@@ -7,8 +7,8 @@ var Load = function() {
 
     var loadImages = function(workspacePath) {
 
-        console.log('workspacePath', workspacePath);
-        console.log('master', workspacePath + '/screenshots/master/');
+        //console.log('workspacePath', workspacePath);
+        //console.log('master', workspacePath + '/master/');
 
         //var rootFiles = listImages('C:/screenshots/candidate');
         //console.log('rootFiles', rootFiles);
@@ -17,13 +17,13 @@ var Load = function() {
         var images = {
             "workspace": workspacePath,
             "snapshots": {
-                "master": listImages(workspacePath + '/screenshots/master/'),
-                "diff": listImages(workspacePath + '/screenshots/diff/'),
-                "candidate": listImages(workspacePath + '/screenshots/candidate/')
+                "master": listImages(workspacePath + '/master/'),
+                "diff": listImages(workspacePath + '/diff/'),
+                "candidate": listImages(workspacePath + '/candidate/')
             }
         };
 
-        console.log('images', images);
+        //console.log('images', images);
         return images;
     };
 

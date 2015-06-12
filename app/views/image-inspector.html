@@ -1,0 +1,36 @@
+<md-dialog aria-label="Inspector">
+    <md-toolbar>
+        <div class="md-toolbar-tools" layout="row" layout-align="space-between">
+            <h2>Inspector</h2>
+            <div class="md-actions" layout="row">
+                <md-button ng-click="cancel()" class="md-primary">
+                    Cancel
+                </md-button>
+            </div>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+
+        <md-content class="md-padding">
+            <md-tabs md-selected="selectedIndex" md-dynamic-height md-border-bottom>
+                <md-tab label="Candidate">
+                    <md-content class="md-padding">
+                        <img style="max-width: 100%;max-height: 100%;" src="{{item.images.candidate}}">
+                    </md-content>
+                </md-tab>
+                <md-tab label="Diff">
+                    <md-content class="md-padding">
+                        <img style="max-width: 100%;max-height: 100%;" src="{{item.images.diff}}">
+                    </md-content>
+                </md-tab>
+                <md-tab label="Master">
+                    <md-content class="md-padding">
+                        <img style="max-width: 100%;max-height: 100%;" src="{{item.images.master}}">
+                    </md-content>
+                </md-tab>
+            </md-tabs>
+        </md-content>
+
+    </md-dialog-content>
+
+</md-dialog>

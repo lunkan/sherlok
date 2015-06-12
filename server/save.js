@@ -4,12 +4,10 @@ var path = require('path');
 var Save = function() {
 
     var saveImages = function(workspacePath, data) {
-
-        console.log('files', data);
         data.files.forEach(function(fileName) {
-            var copyFrom = workspacePath + '/screenshots/candidate/'+fileName;
-            var copyTo = workspacePath + '/screenshots/master/' + fileName;
-            var removeFrom = workspacePath + '/screenshots/diff/' + fileName;
+            var copyFrom = workspacePath + '/candidate/'+fileName;
+            var copyTo = workspacePath + '/master/' + fileName;
+            var removeFrom = workspacePath + '/diff/' + fileName;
 
             copyFile(copyFrom, copyTo, null);
             fs.unlinkSync(removeFrom);

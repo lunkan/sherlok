@@ -18,8 +18,12 @@ angular.module('dashaApp').service('ImageService', function($q, $http, ImageColl
 		return $q(function(resolve, reject) {
 
             var workspacePath = {
-                path: 'C:/screenshots/'
+                path: './app/images/'
             };
+
+
+
+            //path: 'C:/screenshots/'
 
 			$http.post('/api/details', workspacePath).
 				success(function(data, status, headers, config) {

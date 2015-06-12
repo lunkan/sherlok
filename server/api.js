@@ -63,3 +63,17 @@ var Api = function() {
 };
 
 module.exports = new Api();
+
+/*
+ //Image
+ /*else if(req.url) {
+ if (action == '/logo.gif') {
+ var img = fs.readFileSync('./logo.gif');
+ res.writeHead(200, {'Content-Type': 'image/gif' });
+ res.end(img, 'binary');
+ } else {
+ res.writeHead(200, {'Content-Type': 'text/plain' });
+ res.end('Hello World \n');
+ }
+ }
+ */

@@ -1,36 +1,42 @@
 <div class="container">
 <md-toolbar class="container-head" ng-if="currentItem">
-	<div class="md-toolbar-tools" layout="row" layout-align="space-between center">
+	<div layout="row" layout-align="space-between center">
 		<md-button ng-disabled="!hasPrevious" class="md-fab" style="height:46px" ng-click="onPrevious()">
 			<md-icon icon="/images/icons/arrow-left.svg"></md-icon>
 		</md-button>
-		<h2 style="font-size:26px;">														
-			<span>{{currentItem.name}}</span>
-			<span class="page-index-label">
-				<span>{{currentIndex}}</span>/<span>{{numItems}}</span>
-			</span>
-		</h2>
+        <div layout="row" layout-align="center center">
+            <md-button class="md-raised md-primary" ng-click="onSave()">Save all</md-button>
+            <md-button class="md-raised md-primary" ng-click="onQuit()">Quit</md-button>
+        </div>
 		<md-button ng-disabled="!hasNext" class="md-fab" style="height:46px" ng-click="onNext()">
 			<md-icon icon="/images/icons/arrow-right.svg"></md-icon>
 		</md-button>
     </div>
 </md-toolbar>
-<div class="container-body" layout="column">
+<div class="container-body" layout="column" layout-align="top center">
+    <div layout="row" layout-align="center center">
+        <h2 style="font-size:26px;">
+            <span>{{currentItem.name}}</span>
+                <span class="page-index-label">
+                    <span>{{currentIndex}}</span>/<span>{{numItems}}</span>
+                </span>
+        </h2>
+    </div>
 	<div ng-repeat="snapshotItem in snapshotCollection" ng-controller="ImageSnapshotItemCtrl" ng-init="init(snapshotItem)" ng-show="isReady">
 		<md-subheader class="md-primary">{{item.type}}</md-subheader>
 		<div layout="row">
 			<div flex layout-align="center center">
-				<md-card ng-click="select('candidate')" ng-class="item.selected == 'candidate' ? 'selected-snapshot' : ''">
+				<md-card ng-dblclick="inspect($event, 'candidate')" ng-click="select('candidate')" ng-class="item.selected == 'candidate' ? 'selected-snapshot' : ''">
 					<img src="{{item.images.candidate}}">
 				</md-card>
 			</div>
 			<div flex layout-align="center center">
-				<md-card class="diff-snapshot">
+				<md-card ng-dblclick="inspect($event, 'diff')" class="diff-snapshot">
 					<img src="{{item.images.diff}}">
 				</md-card>
 			</div>
 			<div flex layout-align="center center">
-				<md-card ng-click="select('master')" ng-class="item.selected == 'master' ? 'selected-snapshot' : ''">
+				<md-card ng-dblclick="inspect($event, 'master')" ng-click="select('master')" ng-class="item.selected == 'master' ? 'selected-snapshot' : ''">
 					<img src="{{item.images.master}}">
 				</md-card>
 			</div>
@@ -38,11 +44,20 @@
 		<md-divider ng-if="!$last"></md-divider>
 	</div>
 </div>
-<md-toolbar class="container-foot" layout-align="center">
-	<div layout="row" layout-align="center center" layout-margin>
-		<!--<md-button class="md-raised md-primary" ng-click="onConfirm()">Confirm</md-button>-->
-        <md-button class="md-raised md-primary" ng-click="onSave()">Save all</md-button>
-        <md-button class="md-raised md-primary" ng-click="onQuit()">Quit</md-button>
+<md-toolbar layout-align="center">
+	<div layout="row" layout-align="space-between center" layout-margin>
+        <md-button ng-disabled="!hasPrevious" class="md-fab" style="height:46px" ng-click="onPrevious()">
+            <md-icon icon="/images/icons/arrow-left.svg"></md-icon>
+        </md-button>
+
+        <div layout="row" layout-align="center center">
+		    <md-button class="md-raised md-primary" ng-click="onSave()">Save all</md-button>
+            <md-button class="md-raised md-primary" ng-click="onQuit()">Quit</md-button>
+        </div>
+
+        <md-button ng-disabled="!hasNext" class="md-fab" style="height:46px" ng-click="onNext()">
+            <md-icon icon="/images/icons/arrow-right.svg"></md-icon>
+        </md-button>
 	</div>
 </md-toolbar>
 </div>
