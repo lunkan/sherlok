@@ -16,7 +16,12 @@ angular.module('dashaApp').service('ImageService', function($q, $http, ImageColl
 	
 	this.load = function() {
 		return $q(function(resolve, reject) {
-			$http.get('/api/details').
+
+            var workspacePath = {
+                path: 'C:/screenshots/'
+            };
+
+			$http.post('/api/details', workspacePath).
 				success(function(data, status, headers, config) {
 					collection = new ImageCollection(data.snapshots);
 					resolve("success");
@@ -38,19 +43,6 @@ angular.module('dashaApp').service('ImageService', function($q, $http, ImageColl
             $http.post('/api/save', confirmedImages).
                 success(function(data, status, headers, config) {
                     console.log('saved!');
-                    resolve("success");
-                }).
-                error(function(data, status, headers, config) {
-                    reject("error");
-                });
-        });
-    };
-
-    this.revert = function() {
-        return $q(function(resolve, reject) {
-            $http.post('/api/revert').
-                success(function(data, status, headers, config) {
-                    console.log('reverted!');
                     resolve("success");
                 }).
                 error(function(data, status, headers, config) {

@@ -27,7 +27,8 @@ angular.module('dashaApp').factory('ImageItem', function() {
         var confirmedSnapshots = [];
         this.snapshotCollection.forEach(function(snapshot) {
             if(snapshot.selected === 'candidate') {
-                confirmedSnapshots.push(snapshot.images.candidate);
+                var fileName = snapshot.images.candidate.replace(/^.*[\\\/]/, '');
+                confirmedSnapshots.push(fileName);
             }
         });
 

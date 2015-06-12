@@ -41,22 +41,10 @@ angular.module('dashaApp')
 			refresh();
 		}
 	};
-	
-	/*$scope.onConfirm = function() {
-		if(ImageService.getCollection().next()) {
-			refresh();
-		}
-	};*/
 
     $scope.onSave = function() {
         $location.path('/save');
     };
-
-    /*$scope.onRevert = function() {
-        ImageService.revert().then(function() {
-            console.log('Quit or die after revert?');
-        });
-    };*/
 
     $scope.onQuit = function() {
         $location.path('/');
